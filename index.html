@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TRADE WITH MOHIT AGARWAL</title>
+    <title>TRADE WITH GAUTAM JHA</title>
 
     <!-- ========================================== -->
     <!-- META PIXEL & TRACKING CODE -->
@@ -144,6 +144,7 @@
             margin-bottom: 25px;
             letter-spacing: 1px;
             transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
         }
 
         .join-btn:active {
@@ -169,9 +170,15 @@
             font-weight: 500;
         }
 
-        .ad-badge span {
+        /* Agency Link Styling */
+        .ad-badge a {
             color: #00b4d8;
             font-weight: 700;
+            text-decoration: none;
+        }
+
+        .ad-badge a:hover {
+            text-decoration: underline;
         }
 
         /* Meta Policy Mandatory Disclaimers */
@@ -207,8 +214,7 @@
         </div>
 
         <!-- Name Title -->
-        <div class="main-name">Trade with Gautam jha™
-</div>
+        <div class="main-name">Trade with Gautam jha™</div>
 
         <!-- Point List -->
         <ul class="feature-list">
@@ -223,8 +229,8 @@
             Join our free educational community to learn stock market analysis.
         </div>
 
-        <!-- Telegram Button (Triggers Meta Lead Event) -->
-        <a id="telegramLink" href="https://t.me/+N0aKn8a4q680MWY1" target="_blank" class="join-btn" onclick="trackLeadEvent()">
+        <!-- Telegram Button (Triggers Meta Lead & Subscribe Events) -->
+        <a id="telegramLink" href="https://t.me/+N0aKn8a4q680MWY1" target="_blank" class="join-btn" onclick="trackEvents(event)">
             JOIN TELEGRAM NOW
         </a>
 
@@ -233,9 +239,9 @@
             नियत अच्छी और मेहनत सच्ची हो, तो कामयाबी जरूर मिलती है।
         </div>
 
-        <!-- Agency Tag -->
+        <!-- Agency Tag with Telegram Link -->
         <div class="ad-badge">
-            Promoted by <span>AD ELITE MARKETING AGENCY</span>
+            Promoted by <a href="https://t.me/+mp524qElHEQ2YWU1" target="_blank">AD ELITE MARKETING AGENCY</a>
         </div>
 
         <!-- Compliance Disclaimer for Meta Ad Approval -->
@@ -251,16 +257,22 @@
 
     </div>
 
-    <!-- JavaScript - Lead Event Tracking -->
+    <!-- JavaScript - Multi-Event Tracking Code -->
     <script>
-        let telegramUrl = "https://t.me/+N0aKn8a4q680MWY1"; 
+        var hasTracked = false;
+        var telegramUrl = "https://t.me/+N0aKn8a4q680MWY1"; 
         document.getElementById("telegramLink").href = telegramUrl;
 
-        function trackLeadEvent() {
-            if(typeof fbq !== 'undefined') {
-                // Meta Lead Event standard trigger for Ad optimization
+        function trackEvents(event) {
+            if (!hasTracked && typeof fbq !== 'undefined') {
+                // Standard Meta Events
                 fbq('track', 'Lead');
+                fbq('track', 'Subscribe');
+                
+                // Custom Event
                 fbq('trackCustom', 'TelegramJoinClick'); 
+                
+                hasTracked = true; // Prevents duplicate tracking on double clicks
             }
         }
     </script>
