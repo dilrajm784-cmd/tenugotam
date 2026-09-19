@@ -162,7 +162,6 @@
             font-weight: 500;
         }
 
-        /* Agency Link Styling */
         .ad-badge a {
             color: #00b4d8;
             font-weight: 700;
@@ -173,7 +172,6 @@
             text-decoration: underline;
         }
 
-        /* Meta Policy Mandatory Disclaimers */
         .disclaimer-box {
             font-size: 10.5px;
             color: #6b7280;
@@ -216,8 +214,8 @@
             <li><span class="icon">💻</span> Educational Case Discussions</li>
         </ul>
 
-        <!-- Telegram Button (Triggers Meta Lead & Subscribe Events) -->
-        <a id="telegramLink" href="https://t.me/+N0aKn8a4q680MWY1" target="_blank" class="join-btn" onclick="trackEvents(event)">
+        <!-- Telegram Button -->
+        <a id="telegramLink" href="javascript:void(0);" class="join-btn" onclick="trackButtonClick()">
             JOIN TELEGRAM NOW
         </a>
 
@@ -231,7 +229,7 @@
             Promoted by <a href="https://t.me/+mp524qElHEQ2YWU1" target="_blank">AD ELITE MARKETING AGENCY</a>
         </div>
 
-        <!-- Compliance Disclaimer for Meta Ad Approval -->
+        <!-- Compliance Disclaimer -->
         <div class="disclaimer-box">
             <strong>Disclaimer:</strong> Content shared is purely for educational purposes. We do not provide buy/sell tips or guaranteed returns. Investments in the securities market are subject to market risks. Read all related documents carefully before investing.
         </div>
@@ -244,22 +242,31 @@
 
     </div>
 
-    <!-- JavaScript - Multi-Event Tracking Code -->
+    <!-- JavaScript - Single Click & Only Lead Tracking Script -->
     <script>
-        var hasTracked = false;
-        var telegramUrl = "https://t.me/+N0aKn8a4q680MWY1"; 
-        document.getElementById("telegramLink").href = telegramUrl;
+        var isClicked = false;
+        var telegramUrl = "https://t.me/+N0aKn8a4q680MWY1";
 
-        function trackEvents(event) {
-            if (!hasTracked && typeof fbq !== 'undefined') {
-                // Standard Meta Events
-                fbq('track', 'Lead');
-                fbq('track', 'Subscribe');
-                
-                // Custom Event
-                fbq('trackCustom', 'TelegramJoinClick'); 
-                
-                hasTracked = true; // Prevents duplicate tracking on double clicks
+        function trackButtonClick() {
+            if (!isClicked) {
+                isClicked = true;
+
+                // केवल Lead इवेंट फायर होगा
+                if (typeof fbq !== 'undefined') {
+                    fbq('track', 'Lead');
+                }
+
+                // बटन को विजुअली डिसेबल कर दें
+                var btn = document.getElementById('telegramLink');
+                if (btn) {
+                    btn.style.pointerEvents = 'none';
+                    btn.style.opacity = '0.7';
+                }
+
+                // 300ms के बाद Telegram पर रीडायरेक्ट करें
+                setTimeout(function() {
+                    window.location.href = telegramUrl;
+                }, 300);
             }
         }
     </script>
